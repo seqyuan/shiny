@@ -29,16 +29,13 @@ RUN wget --no-verbose https://download3.rstudio.org/ubuntu-14.04/x86_64/VERSION 
     . /etc/environment
 
 
-RUN R -e "install.packages(c('shiny', 'rmarkdown', 'DT','BiocManager','ggplot2','shinydashboard', 'shinyFiles','shinythemes','ggrepel', 'gridExtra', 'RColorBrewer','devtools', 'cowplot', 'Cairo' , 'reticulate', 'dplyr', 'patchwork'))" && \
-    R -e "BiocManager::install(c('ComplexHeatmap'))" && \
-    R -e "remotes::install_version('SeuratObject', '4.1.4', repos = c('https://satijalab.r-universe.dev', getOption('repos')))" && \
-    R -e "remotes::install_version('Seurat', '4.4.0', repos = c('https://satijalab.r-universe.dev', getOption('repos')))"
+ADD installRpackage.R /tmp/
 
+RUN Rscript /tmp/installRpackage.R
 
 RUN cp -R /usr/local/lib/R/site-library/shiny/examples/* /srv/shiny-server/ && \
-	chown shiny:shiny /var/lib/shiny-server
-
-RUN echo "export PATH=$PATH:/dockerbin" >> ~/.bashrc
+	chown shiny:shiny /var/lib/shiny-server && \
+    echo "export PATH=$PATH:/dockerbin" >> ~/.bashrc
 
 
 EXPOSE 3838
