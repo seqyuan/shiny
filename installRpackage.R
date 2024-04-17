@@ -14,6 +14,7 @@ pas <- c('shiny',
 	'Cairo' , 
 	'reticulate', 
 	'dplyr', 
+	'igraph',
 	'patchwork')
 
 
