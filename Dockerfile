@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
     libhdf5-dev \
     libudunits2-dev \
     imagemagick \
+    libglpk40 \
     wget
 
 # Download and install shiny server
@@ -32,7 +33,7 @@ RUN wget --no-verbose https://download3.rstudio.org/ubuntu-14.04/x86_64/VERSION 
 ADD installRpackage.R /tmp/
 
 RUN Rscript /tmp/installRpackage.R
-
+RUN R -e "install.packages('igraph', dependencies = T)"
 RUN cp -R /usr/local/lib/R/site-library/shiny/examples/* /srv/shiny-server/ && \
 	chown shiny:shiny /var/lib/shiny-server && \
     echo "export PATH=$PATH:/dockerbin" >> ~/.bashrc

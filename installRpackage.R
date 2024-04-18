@@ -1,5 +1,5 @@
 pas <- c('shiny', 
-	'rmarkdown', 
+	'markdown', 
 	'DT',
 	'BiocManager',
 	'ggplot2',
@@ -13,8 +13,7 @@ pas <- c('shiny',
 	'cowplot', 
 	'Cairo' , 
 	'reticulate', 
-	'dplyr', 
-	'igraph',
+	'dplyr',
 	'patchwork')
 
 
